@@ -1,0 +1,31 @@
+<ul class="custom">
+  <li><button mat-raised-button color="primary" (click)="showSnackbar('Net is offline, Trying to reconnect ....')">
+  Simple Snackbar
+</button>
+</li>
+  <li><button mat-raised-button color="primary" (click)="showSnackbarAction('Net is offline, Trying to reconnect ....','Done')">
+  Snackbar action
+</button>
+</li>
+  <li><button mat-raised-button color="primary" (click)="showSnackbarDuration('Net is offline, Trying to reconnect in 5 seconds....','Done','5000')">
+  Snackbar Duration
+</button></li>
+<li>
+  <button mat-raised-button color="primary" (click)="showSnackbarTopPosition('Net is offline, Trying to reconnect in 2 seconds....','Done','1000')">
+  Snackbar Top Position</button>
+
+  </li>
+  <li>
+  <button mat-raised-button color="primary" (click)="showSnackbarCssStyles('Net is offline, Trying to reconnect in 2 seconds....','Close','4000')">
+  Snackbar CSS Styles</button>
+
+  </li>
+   <li>
+  <button mat-raised-button color="primary" (click)="showBasicComponent()">
+  Snackbar passing data</button>
+
+  </li>
+</ul>
+    <router-outlet></router-outlet>
+
+
