@@ -24,7 +24,9 @@ export class TreeDynamicComponent implements OnInit {
     this.dataSource.data = database.initialData();
   }
   ngOnInit(): void {
-    
+    this.permissionService.getPermission().subscribe(permissionData => {
+      console.log(permissionData);
+    });
   }
 
   treeControl: FlatTreeControl<DynamicFlatNode>;
