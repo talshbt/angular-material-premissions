@@ -1,10 +1,9 @@
 
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { Component, Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { DynamicDatabase } from './dynamic-data-base';
 import { DynamicDataSource } from './dynamic-data-source';
 import { DynamicFlatNode } from './dynamic-flat-node';
-
 
 @Component({
   selector: 'app-tree-dynamic',
