@@ -10,6 +10,7 @@ import { MatSelect } from '@angular/material/select';
 import { ReplaySubject, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { Permission, PERMISSIONS } from '../demo-data';
+import { PermissionService } from '../permission.service';
 
 @Component({
   selector: 'app-multi-select-search',
@@ -42,7 +43,7 @@ export class MultiSelectSearchComponent implements OnInit {
     }
   }
 
-  constructor() {}
+  constructor(private permissionService: PermissionService) {}
 
   ngOnInit() {
     this.filteredPermissionsMulti.next(this.permissions.slice());
@@ -104,4 +105,6 @@ export class MultiSelectSearchComponent implements OnInit {
       )
     );
   }
+
+ 
 }
