@@ -10,7 +10,8 @@ export class PermissionService {
   constructor() { }
 
 
-  getPermission(){
+  getPermission(selectedId){
+    console.log(selectedId);
 
   }
 
