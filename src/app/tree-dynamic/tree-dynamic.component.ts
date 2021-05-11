@@ -144,12 +144,13 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
 /**
  * @title Tree with dynamic data
  */
+
 @Component({
-  selector: 'tree-dynamic-example',
-  templateUrl: 'tree-dynamic-example.html',
-  styleUrls: ['tree-dynamic-example.css']
+  selector: 'app-tree-dynamic',
+  templateUrl: './tree-dynamic.component.html',
+  styleUrls: ['./tree-dynamic.component.css']
 })
-export class TreeDynamicExample {
+export class TreeDynamicComponent {
   constructor(database: DynamicDatabase) {
     this.treeControl = new FlatTreeControl<DynamicFlatNode>(
       this.getLevel,

@@ -11,6 +11,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { MultiSelectSearchComponent } from './multi-select-search/multi-select-search.component';
+import { TreeDynamicComponent } from './tree-dynamic/tree-dynamic.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { MultiSelectSearchComponent } from './multi-select-search/multi-select-s
     NgxMatSelectSearchModule,
     MaterialModule
     ],
-  declarations: [AppComponent, MultiSelectSearchComponent],
+  declarations: [AppComponent, MultiSelectSearchComponent, TreeDynamicComponent],
   bootstrap: [AppComponent],
   providers: []
 })
