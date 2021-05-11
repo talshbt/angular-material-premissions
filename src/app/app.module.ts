@@ -10,7 +10,6 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
-import { SelectPermissionsComponent } from './select-permissions/select-permissions.component';
 import { MultiSelectSearchComponent } from './multi-select-search/multi-select-search.component';
 
 @NgModule({
@@ -24,7 +23,7 @@ import { MultiSelectSearchComponent } from './multi-select-search/multi-select-s
     NgxMatSelectSearchModule,
     MaterialModule
     ],
-  declarations: [AppComponent, SelectPermissionsComponent, MultiSelectSearchComponent],
+  declarations: [AppComponent, MultiSelectSearchComponent],
   bootstrap: [AppComponent],
   providers: []
 })
