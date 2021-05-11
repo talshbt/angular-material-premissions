@@ -23,7 +23,8 @@ export class DynamicDatabase {
   }
 
   addNode(newNode) {
-    this.rootLevelNodes;
+    console.log('newnode');
+    console.log(newNode);
   }
 
   isExpandable(node: string): boolean {

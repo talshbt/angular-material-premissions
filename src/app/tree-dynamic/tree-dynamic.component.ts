@@ -12,7 +12,7 @@ import { DynamicFlatNode } from './dynamic-flat-node';
 })
 export class TreeDynamicComponent implements OnInit {
   constructor(
-    database: DynamicDatabase,
+    private database: DynamicDatabase,
     private permissionService: PermissionService
   ) {
     this.treeControl = new FlatTreeControl<DynamicFlatNode>(
@@ -25,6 +25,7 @@ export class TreeDynamicComponent implements OnInit {
   }
   ngOnInit(): void {
     this.permissionService.getPermission().subscribe(permissionData => {
+      this.database.addNode(permissionData);
       console.log(permissionData);
     });
   }
