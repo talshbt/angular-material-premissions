@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { DynamicFlatNode } from "./dynamic-flat-node";
+import { Injectable } from '@angular/core';
+import { DynamicFlatNode } from './dynamic-flat-node';
 
 @Injectable({ providedIn: 'root' })
 export class DynamicDatabase {
@@ -10,8 +10,8 @@ export class DynamicDatabase {
     ['Web Client', ['Yellow', 'White', 'Purple']]
   ]);
 
-
-  rootLevelNodes: string[] = ['Tribe', 'Mesila','Rest'];
+  // rootLevelNodes: string[] = ['Tribe', 'Mesila', 'Rest'];
+  rootLevelNodes: string[] = [];
 
   /** Initial data from database */
   initialData(): DynamicFlatNode[] {
@@ -20,6 +20,10 @@ export class DynamicDatabase {
 
   getChildren(node: string): string[] | undefined {
     return this.dataMap.get(node);
+  }
+
+  addNode(newNode) {
+    this.rootLevelNodes;
   }
 
   isExpandable(node: string): boolean {
