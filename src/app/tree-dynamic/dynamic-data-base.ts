@@ -11,7 +11,7 @@ export class DynamicDatabase {
   ]);
 
 
-  rootLevelNodes: string[] = ['Tribe', 'Mesila'];
+  rootLevelNodes: string[] = ['Tribe', 'Mesila','Rest'];
 
   /** Initial data from database */
   initialData(): DynamicFlatNode[] {
