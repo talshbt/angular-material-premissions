@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-
 export class PermissionService {
-
   private permissionsChange = new Subject<any>();
 
-  constructor() { }
+  constructor() {}
 
-
-  getPermission(selectedId){
-    console.log(selectedId);
-
+  sendPermission(selectedId) {
+    // console.log(selectedId);
+    this.permissionsChange.next(selectedId);
   }
 
+  getPermission(): Observable<any> {
+    return this.permissionsChange.asObservable();
+  }
 }
