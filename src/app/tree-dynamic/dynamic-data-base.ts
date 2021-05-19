@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { DynamicFlatNode } from './dynamic-flat-node';
 
 @Injectable({ providedIn: 'root' })
-export class DynamicDatabase {
+export class DynamicDatabase implements OnInit {
+  
+ngOnInit(): void {
+}
   dataMap = new Map<string, string[]>([
     ['Tribe', ['Apple', 'Orange', 'Banana']],
     ['Mesila', ['Tomato', 'Potato', 'Onion']],
