@@ -1,11 +1,16 @@
 import { Injectable, OnInit } from '@angular/core';
+import { PermissionService } from '../permission.service';
 import { DynamicFlatNode } from './dynamic-flat-node';
 
 @Injectable({ providedIn: 'root' })
 export class DynamicDatabase implements OnInit {
-  
-ngOnInit(): void {
-}
+  ngOnInit(): void {
+    // this.permissionService.getPermission().subscribe(permissionData => {
+    //   this.rootLevelNodes.push(permissionData);
+    // });
+  }
+
+  constructor(private permissionService: PermissionService) {}
   dataMap = new Map<string, string[]>([
     ['Tribe', ['Apple', 'Orange', 'Banana']],
     ['Mesila', ['Tomato', 'Potato', 'Onion']],
@@ -13,7 +18,7 @@ ngOnInit(): void {
     ['Web Client', ['Yellow', 'White', 'Purple']]
   ]);
 
-  // rootLevelNodes: string[] = ['Tribe', 'Mesila', 'Rest'];
+  //rootLevelNodes: string[] = ['Tribe', 'Mesila', 'Rest'];
   rootLevelNodes: string[] = [];
 
   /** Initial data from database */
@@ -26,8 +31,9 @@ ngOnInit(): void {
   }
 
   addNode(newNode) {
-    console.log('newnode');
-    console.log(newNode);
+    // console.log(x);
+    this.rootLevelNodes.push(newNode.name);
+    //  console.log(this.rootLevelNodes);
   }
 
   isExpandable(node: string): boolean {

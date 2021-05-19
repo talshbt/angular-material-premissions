@@ -3,6 +3,8 @@ import { Observable, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class PermissionService {
+
+  permissionTreeChanged = new Subject<any>();
   private permissionsChange = new Subject<any>();
 
   constructor() {}
@@ -15,4 +17,5 @@ export class PermissionService {
   getPermission(): Observable<any> {
     return this.permissionsChange.asObservable();
   }
+
 }

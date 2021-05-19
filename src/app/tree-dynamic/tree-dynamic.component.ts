@@ -21,12 +21,17 @@ export class TreeDynamicComponent implements OnInit {
     );
     this.dataSource = new DynamicDataSource(this.treeControl, database);
 
-    this.dataSource.data = database.initialData();
+    //this.dataSource.data = database.initialData();
+
+    this.permissionService.getPermission().subscribe(permissionData => {
+      this.database.addNode(permissionData);
+      this.dataSource.data = database.initialData();
+    });
   }
   ngOnInit(): void {
     this.permissionService.getPermission().subscribe(permissionData => {
       this.database.addNode(permissionData);
-      console.log(permissionData);
+      // console.log(permissionData);
     });
   }
 
