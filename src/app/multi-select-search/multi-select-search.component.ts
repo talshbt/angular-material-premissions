@@ -46,7 +46,7 @@ export class MultiSelectSearchComponent implements OnInit {
 
       // console.log(event.source.value);
 
-      this.permissionService.sendPermission(event.source.value);
+      this.permissionService.sendPermission(this.selections);
     }
   }
 

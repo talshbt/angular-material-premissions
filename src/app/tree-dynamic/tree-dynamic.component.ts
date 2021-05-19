@@ -24,15 +24,15 @@ export class TreeDynamicComponent implements OnInit {
     //this.dataSource.data = database.initialData();
 
     this.permissionService.getPermission().subscribe(permissionData => {
-      this.database.addNode(permissionData);
-      this.dataSource.data = database.initialData();
+      // this.database.addNode(permissionData);
+      this.dataSource.data = database.initialData(permissionData);
     });
   }
   ngOnInit(): void {
-    this.permissionService.getPermission().subscribe(permissionData => {
-      this.database.addNode(permissionData);
-      // console.log(permissionData);
-    });
+    // this.permissionService.getPermission().subscribe(permissionData => {
+    //   this.database.addNode(permissionData);
+    //   // console.log(permissionData);
+    // });
   }
 
   treeControl: FlatTreeControl<DynamicFlatNode>;

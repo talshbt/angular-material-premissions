@@ -22,7 +22,8 @@ export class DynamicDatabase implements OnInit {
   rootLevelNodes: string[] = [];
 
   /** Initial data from database */
-  initialData(): DynamicFlatNode[] {
+  initialData(permissionData): DynamicFlatNode[] {
+    this.rootLevelNodes = permissionData;
     return this.rootLevelNodes.map(name => new DynamicFlatNode(name, 0, true));
   }
 
@@ -30,11 +31,11 @@ export class DynamicDatabase implements OnInit {
     return this.dataMap.get(node);
   }
 
-  addNode(newNode) {
-    // console.log(x);
-    this.rootLevelNodes.push(newNode.name);
-    //  console.log(this.rootLevelNodes);
-  }
+  // addNode(newNode) {
+  //   // console.log(x);
+  //   this.rootLevelNodes.push(newNode.name);
+  //   //  console.log(this.rootLevelNodes);
+  // }
 
   isExpandable(node: string): boolean {
     return this.dataMap.has(node);
