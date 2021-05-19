@@ -1,7 +1,8 @@
-
-
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <mat-icon style="color:green" [class.active]="selected" matListIcon>done</mat-icon>
+
     <button mat-icon-button disabled></button>
     {{node.item}}
   </mat-tree-node>
@@ -13,10 +14,11 @@
       </mat-icon>
     </button>
     {{node.item}}
-    <mat-progress-bar *ngIf="node.isLoading"
-                      mode="indeterminate"
-                      class="example-tree-progress-bar"></mat-progress-bar>
+    <mat-progress-bar *ngIf="node.isLoading" mode="indeterminate" class="example-tree-progress-bar"></mat-progress-bar>
   </mat-tree-node>
 </mat-tree>
 
-
+<!-- <mat-list-item [routerLink]="['/home1']" [routerLinkActive]="['active']">
+		<mat-icon [class.active]="selected" matListIcon>home</mat-icon>
+		<a matLine>Home 1</a>
+	</mat-list-item> -->
