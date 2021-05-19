@@ -12,10 +12,10 @@ export class DynamicDatabase implements OnInit {
 
   constructor(private permissionService: PermissionService) {}
   dataMap = new Map<string, string[]>([
-    ['Tribe', ['Apple', 'Orange', 'Banana']],
-    ['Mesila', ['Tomato', 'Potato', 'Onion']],
-    ['Rest', ['Fuji', 'Macintosh']],
-    ['Web Client', ['Yellow', 'White', 'Purple']]
+    ['Tribe', ['a', 'b', 'c']],
+    ['Mesila', ['e', 'f', 'g']],
+    ['Rest', ['h', 'i']],
+    ['Web Client', ['j', 'k', 'l']]
   ]);
 
   //rootLevelNodes: string[] = ['Tribe', 'Mesila', 'Rest'];
