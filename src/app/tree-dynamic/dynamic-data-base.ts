@@ -19,7 +19,22 @@ export class DynamicDatabase implements OnInit {
   // ]);
 
   dataMap = new Map<string, { name: string; status: string }[]>([
-    ['Tribe', [{ name: 'sfsx', status: 'success' }]]
+    [
+      'Tribe',
+      [
+        { name: 'a', status: 'success' },
+        { name: 'b', status: 'success' },
+        { name: 'c', status: 'success' }
+      ]
+    ],
+    [
+      'Mesila',
+      [
+        { name: 'd', status: 'success' },
+        { name: 'e', status: 'success' },
+        { name: 'f', status: 'success' }
+      ]
+    ]
   ]);
 
   //rootLevelNodes: string[] = ['Tribe', 'Mesila', 'Rest'];
