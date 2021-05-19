@@ -1,4 +1,4 @@
 export interface Node{
-  name:string,
-  status:string
+   name:string,
+   status:string
 }

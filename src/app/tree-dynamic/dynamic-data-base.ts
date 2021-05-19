@@ -11,11 +11,15 @@ export class DynamicDatabase implements OnInit {
   }
 
   constructor(private permissionService: PermissionService) {}
-  dataMap = new Map<string, string[]>([
-    ['Tribe', ['a', 'b', 'c']],
-    ['Mesila', ['e', 'f', 'g']],
-    ['Rest', ['h', 'i']],
-    ['Web Client', ['j', 'k', 'l']]
+  // dataMap = new Map<string, string[]>([
+  //   ['Tribe', ['a', 'b', 'c']],
+  //   ['Mesila', ['e', 'f', 'g']],
+  //   ['Rest', ['h', 'i']],
+  //   ['Web Client', ['j', 'k', 'l']]
+  // ]);
+
+  dataMap = new Map<string, { name: string; status: string }[]>([
+    ['Tribe', [{ name: 'sfsx', status: 'success' }]]
   ]);
 
   //rootLevelNodes: string[] = ['Tribe', 'Mesila', 'Rest'];
@@ -27,8 +31,8 @@ export class DynamicDatabase implements OnInit {
     return this.rootLevelNodes.map(name => new DynamicFlatNode(name, 0, true));
   }
 
-  getChildren(node: string): string[] | undefined {
-    return this.dataMap.get(node);
+  getChildren(parent: string) {
+    return this.dataMap.get(parent);
   }
 
   // addNode(newNode) {

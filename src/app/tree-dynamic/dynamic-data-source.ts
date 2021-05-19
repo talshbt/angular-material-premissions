@@ -1,4 +1,3 @@
-
 import {
   CollectionViewer,
   SelectionChange,
@@ -62,6 +61,7 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
    */
   toggleNode(node: DynamicFlatNode, expand: boolean) {
     const children = this._database.getChildren(node.item);
+    console.log(children);
     const index = this.data.indexOf(node);
     if (!children || index < 0) {
       // If no children, or cannot find the node, no op
@@ -73,11 +73,11 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
     setTimeout(() => {
       if (expand) {
         const nodes = children.map(
-          name =>
+          child =>
             new DynamicFlatNode(
-              name,
+              child.name,
               node.level + 1,
-              this._database.isExpandable(name)
+              this._database.isExpandable(child.name)
             )
         );
         this.data.splice(index + 1, 0, ...nodes);
@@ -97,4 +97,3 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
     }, 1000);
   }
 }
-
