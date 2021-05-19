@@ -20,7 +20,7 @@ import { PermissionService } from '../permission.service';
 export class MultiSelectSearchComponent implements OnInit {
   /** list of permissions */
   protected permissions: Permission[] = PERMISSIONS;
-  selections = [];
+  selectedPermissions = [];
 
   /** control for the selected permission for multi-selection */
   public permissionMultiCtrl: FormControl = new FormControl();
@@ -40,13 +40,8 @@ export class MultiSelectSearchComponent implements OnInit {
 
   change(event: { isUserInput: any; source: { value: any; selected: any } }) {
     if (event.isUserInput) {
-      this.selections.push(event.source.value.name);
-      console.log(this.selections);
-      // console.log(event.source.value, event.source.selected);
-
-      // console.log(event.source.value);
-
-      this.permissionService.sendPermission(this.selections);
+      this.selectedPermissions.push(event.source.value.name);
+      this.permissionService.sendPermission(this.selectedPermissions);
     }
   }
 
