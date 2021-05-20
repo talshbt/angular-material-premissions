@@ -1,11 +1,31 @@
 import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { PermissionService } from '../permission.service';
+import { TodoItemFlatNode } from './todo-item-flat-node';
 import { TodoItemNode } from './todo-item-node';
-import { TREE_DATA } from './tree-data';
+// import { TREE_DATA } from './tree-data';
+
+export const TREE_DATA = {
+  Tribe: {
+    'Almond Meal flour': null,
+    'Organic eggs': null,
+    'Protein Powder': null,
+    Fruits: {
+      Apple: null,
+      Berries: ['Blueberry', 'Raspberry'],
+      Orange: null
+    }
+  },
+  Mesila: [
+    'Cook dinner',
+    'Read the Material Design spec',
+    'Upgrade Application to Angular'
+  ]
+};
 
 @Injectable({ providedIn: 'root' })
 export class ChecklistDatabase {
+  treeData = [];
   dataChange = new BehaviorSubject<TodoItemNode[]>([]);
 
   get data(): TodoItemNode[] {
@@ -23,6 +43,14 @@ export class ChecklistDatabase {
 
     // Notify the change.
     this.dataChange.next(data);
+  }
+
+  rootLevelNodes: string[] = [];
+
+  /** Initial data from database */
+  initialData(permissionData): TodoItemFlatNode[] {
+    this.rootLevelNodes = permissionData;
+    return this.rootLevelNodes.map(name => new TodoItemFlatNode(name, 0, true));
   }
 
   /**
