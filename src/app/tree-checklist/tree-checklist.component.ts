@@ -13,7 +13,7 @@ import { TodoItemNode } from './todo-item-node';
   providers: [ChecklistDatabase]
 
 })
-export class TreeChecklistComponent  {
+export class TreeChecklistComponent implements OnInit {
 
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
@@ -37,15 +37,19 @@ export class TreeChecklistComponent  {
   checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
 
   constructor(private _database: ChecklistDatabase) {
-    this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
+    
+  }
+ngOnInit(): void {
+
+  this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<TodoItemFlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-    _database.dataChange.subscribe(data => {
+    this._database.dataChange.subscribe(data => {
       this.dataSource.data = data;
     });
-  }
+}
 
   getLevel = (node: TodoItemFlatNode) => node.level;
 
