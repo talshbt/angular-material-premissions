@@ -50,6 +50,10 @@ ngOnInit(): void {
     this._database.dataChange.subscribe(data => {
       this.dataSource.data = data;
     });
+
+      this.permissionService.getPermission().subscribe(permissionData => {
+      // this.dataSource.data = this.database.initialData(permissionData);
+    });
 }
 
   getLevel = (node: TodoItemFlatNode) => node.level;
