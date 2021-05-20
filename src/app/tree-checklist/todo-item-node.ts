@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 // @Injectable({ providedIn: 'root' })
-export interface TodoItemNode {
+export class TodoItemNode {
   children: TodoItemNode[];
   item: string;
 }
