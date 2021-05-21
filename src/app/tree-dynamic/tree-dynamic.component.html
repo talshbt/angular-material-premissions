@@ -1,8 +1,5 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-    <!-- <mat-icon style="color:green" class="checklist-leaf-node" matListIcon
-      >done</mat-icon
-    > -->
     <button mat-icon-button disabled></button>
 
     <mat-checkbox
@@ -11,8 +8,6 @@
       (change)="todoLeafItemSelectionToggle(node)"
       >{{node.item}}</mat-checkbox
     >
-
-    <!-- {{node.item}} -->
   </mat-tree-node>
   <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
     <button
@@ -24,12 +19,6 @@
         {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
       </mat-icon>
     </button>
-    <!-- {{node.item}} -->
-    <!-- <mat-progress-bar
-      *ngIf="node.isLoading"
-      mode="indeterminate"
-      class="example-tree-progress-bar"
-    ></mat-progress-bar> -->
 
     <mat-checkbox
       [checked]="descendantsAllSelected(node)"
@@ -39,8 +28,3 @@
     >
   </mat-tree-node>
 </mat-tree>
-
-<!-- <mat-list-item [routerLink]="['/home1']" [routerLinkActive]="['active']">
-		<mat-icon [class.active]="selected" matListIcon>home</mat-icon>
-		<a matLine>Home 1</a>
-	</mat-list-item> -->
