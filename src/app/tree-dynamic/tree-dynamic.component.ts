@@ -87,4 +87,34 @@ export class TreeDynamicComponent implements OnInit {
     }
     return null;
   }
+
+  descendantsAllSelected(node: DynamicFlatNode): boolean {
+    const descendants = this.treeControl.getDescendants(node);
+    const descAllSelected =
+      descendants.length > 0 &&
+      descendants.every(child => {
+        return this.checklistSelection.isSelected(child);
+      });
+    return descAllSelected;
+  }
+
+  descendantsPartiallySelected(node: DynamicFlatNode): boolean {
+    const descendants = this.treeControl.getDescendants(node);
+    const result = descendants.some(child =>
+      this.checklistSelection.isSelected(child)
+    );
+    return result && !this.descendantsAllSelected(node);
+  }
+
+  todoItemSelectionToggle(node: DynamicFlatNode): void {
+    this.checklistSelection.toggle(node);
+    const descendants = this.treeControl.getDescendants(node);
+    this.checklistSelection.isSelected(node)
+      ? this.checklistSelection.select(...descendants)
+      : this.checklistSelection.deselect(...descendants);
+
+    // Force update for the parent
+    descendants.forEach(child => this.checklistSelection.isSelected(child));
+    this.checkAllParentsSelection(node);
+  }
 }
