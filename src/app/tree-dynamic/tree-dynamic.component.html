@@ -1,20 +1,35 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-    <mat-icon style="color:green" [class.active]="selected" matListIcon>done</mat-icon>
-
+    <!-- <mat-icon style="color:green" class="checklist-leaf-node" matListIcon
+      >done</mat-icon
+    > -->
     <button mat-icon-button disabled></button>
-    {{node.item}}
+
+    <mat-checkbox
+      class="checklist-leaf-node"
+      [checked]="checklistSelection.isSelected(node)"
+      (change)="todoLeafItemSelectionToggle(node)"
+      >{{node.item}}</mat-checkbox
+    >
+
+    <!-- {{node.item}} -->
   </mat-tree-node>
   <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
-    <button mat-icon-button
-            [attr.aria-label]="'Toggle ' + node.item" matTreeNodeToggle>
+    <button
+      mat-icon-button
+      [attr.aria-label]="'Toggle ' + node.item"
+      matTreeNodeToggle
+    >
       <mat-icon class="mat-icon-rtl-mirror">
         {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
       </mat-icon>
     </button>
     {{node.item}}
-    <mat-progress-bar *ngIf="node.isLoading" mode="indeterminate" class="example-tree-progress-bar"></mat-progress-bar>
+    <mat-progress-bar
+      *ngIf="node.isLoading"
+      mode="indeterminate"
+      class="example-tree-progress-bar"
+    ></mat-progress-bar>
   </mat-tree-node>
 </mat-tree>
 
