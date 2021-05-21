@@ -54,6 +54,9 @@ export class TreeDynamicComponent implements OnInit {
 
   /** Check root node checked state and change it accordingly */
   checkRootNodeSelection(node: DynamicFlatNode): void {
+    // console.log('checkRootNodeSelection');
+    console.log(this.checklistSelection.selected);
+
     const nodeSelected = this.checklistSelection.isSelected(node);
     const descendants = this.treeControl.getDescendants(node);
     const descAllSelected =
@@ -71,10 +74,9 @@ export class TreeDynamicComponent implements OnInit {
   /* Get the parent node of a node */
   getParentNode(node: DynamicFlatNode): DynamicFlatNode | null {
     const currentLevel = this.getLevel(node);
+    // console.log(this.checklistSelection.selected);
 
-    console.log('getParentNode');
-
-    console.log(this.checklistSelection.selected);
+    // console.log('getParentNode');
 
     if (currentLevel < 1) {
       return null;
@@ -112,8 +114,8 @@ export class TreeDynamicComponent implements OnInit {
   }
 
   todoItemSelectionToggle(node: DynamicFlatNode): void {
-    console.log('todoItemSelectionToggle');
-    console.log(this.checklistSelection.selected);
+    // console.log('todoItemSelectionToggle');
+    // console.log(this.checklistSelection.selected);
 
     this.checklistSelection.toggle(node);
     const descendants = this.treeControl.getDescendants(node);
@@ -129,4 +131,6 @@ export class TreeDynamicComponent implements OnInit {
   logNode(node) {
     // console.log(node);
   }
+
+  onGetAll() {}
 }
