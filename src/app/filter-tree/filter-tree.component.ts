@@ -8,15 +8,11 @@ import {
 import { BehaviorSubject } from 'rxjs';
 import { FILTER_TREE_DATA } from './filter-tree';
 import { FilterTreeItemFlatNode } from './filter-tree-item-flat-node';
+import { FilterTreeItemNode } from './filter-tree-item-node';
 
 /**
  * Node for to-do item
  */
-export class FilterTreeItemNode {
-  children: FilterTreeItemNode[];
-  item: string;
-  code: string;
-}
 
 /** Flat to-do item node with expandable and level information */
 
