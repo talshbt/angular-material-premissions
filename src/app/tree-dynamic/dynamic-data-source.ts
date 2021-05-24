@@ -94,6 +94,6 @@ export class DynamicDataSource implements DataSource<DynamicFlatNode> {
       // notify the change
       this.dataChange.next(this.data);
       node.isLoading = false;
-    }, 1000);
+    }, 1);
   }
 }
