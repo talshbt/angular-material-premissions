@@ -10,8 +10,8 @@ import { BehaviorSubject } from 'rxjs';
 /**
  * Node for to-do item
  */
-export class TreeItemNode {
-  children: TreeItemNode[];
+export class FilterTreeItemNode {
+  children: FilterTreeItemNode[];
   item: string;
   code: string;
 }
@@ -48,9 +48,9 @@ const TREE_DATA = [
  */
 @Injectable()
 export class ChecklistDatabase {
-  dataChange = new BehaviorSubject<TreeItemNode[]>([]);
+  dataChange = new BehaviorSubject<FilterTreeItemNode[]>([]);
   treeData: any[];
-  get data(): TreeItemNode[] {
+  get data(): FilterTreeItemNode[] {
     return this.dataChange.value;
   }
 
@@ -72,7 +72,7 @@ export class ChecklistDatabase {
    * The return value is the list of `TodoItemNode`.
    */
 
-  buildFileTree(obj: any[], level: string): TreeItemNode[] {
+  buildFileTree(obj: any[], level: string): FilterTreeItemNode[] {
     return obj
       .filter(
         o =>
@@ -81,7 +81,7 @@ export class ChecklistDatabase {
             (level.match(/\./g) || []).length + 1
       )
       .map(o => {
-        const node = new TreeItemNode();
+        const node = new FilterTreeItemNode();
         node.item = o.text;
         node.code = o.code;
         const children = obj.filter(so =>
@@ -139,10 +139,10 @@ export class ChecklistDatabase {
 })
 export class FilterTreeComponent {
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
-  flatNodeMap = new Map<TreeItemFlatNode, TreeItemNode>();
+  flatNodeMap = new Map<TreeItemFlatNode, FilterTreeItemNode>();
 
   /** Map from nested node to flattened node. This helps us to keep the same object for selection */
-  nestedNodeMap = new Map<TreeItemNode, TreeItemFlatNode>();
+  nestedNodeMap = new Map<FilterTreeItemNode, TreeItemFlatNode>();
 
   /** A selected parent node to be inserted */
   selectedParent: TreeItemFlatNode | null = null;
@@ -152,9 +152,9 @@ export class FilterTreeComponent {
 
   treeControl: FlatTreeControl<TreeItemFlatNode>;
 
-  treeFlattener: MatTreeFlattener<TreeItemNode, TreeItemFlatNode>;
+  treeFlattener: MatTreeFlattener<FilterTreeItemNode, TreeItemFlatNode>;
 
-  dataSource: MatTreeFlatDataSource<TreeItemNode, TreeItemFlatNode>;
+  dataSource: MatTreeFlatDataSource<FilterTreeItemNode, TreeItemFlatNode>;
 
   /** The selection for checklist */
   checklistSelection = new SelectionModel<TreeItemFlatNode>(
@@ -186,14 +186,14 @@ export class FilterTreeComponent {
 
   isExpandable = (node: TreeItemFlatNode) => node.expandable;
 
-  getChildren = (node: TreeItemNode): TreeItemNode[] => node.children;
+  getChildren = (node: FilterTreeItemNode): FilterTreeItemNode[] => node.children;
 
   hasChild = (_: number, _nodeData: TreeItemFlatNode) => _nodeData.expandable;
 
   /**
    * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
    */
-  transformer = (node: TreeItemNode, level: number) => {
+  transformer = (node: FilterTreeItemNode, level: number) => {
     const existingNode = this.nestedNodeMap.get(node);
     const flatNode =
       existingNode && existingNode.item === node.item
