@@ -1,7 +1,10 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, Injectable } from '@angular/core';
-import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import {
+  MatTreeFlatDataSource,
+  MatTreeFlattener
+} from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
 
 /**
@@ -25,17 +28,17 @@ export class TreeItemFlatNode {
  * The Json object for to-do list data.
  */
 const TREE_DATA = [
-  { 'text': 'Turkiye', 'code': '0.1' },
-  { 'text': 'İstanbul', 'code': '0.1.1' },
-  { 'text': 'Beykoz', 'code': '0.1.1.1' },
-  { 'text': 'Fatih', 'code': '0.1.1.1' },
-  { 'text': 'Ankara', 'code': '0.1.2' },
-  { 'text': 'Cankaya', 'code': '0.1.2.1' },
-  { 'text': 'Etimesgut', 'code': '0.1.2.1' },
-  { 'text': 'Elazig', 'code': '0.1.3' },
-  { 'text': 'Palu', 'code': '0.1.3.1' },
-  { 'text': 'Baskil', 'code': '0.1.3.2' },
-  { 'text': 'Sivrice', 'code': '0.1.3.3' }
+  { text: 'Turkiye', code: '0.1' },
+  { text: 'İstanbul', code: '0.1.1' },
+  { text: 'Beykoz', code: '0.1.1.1' },
+  { text: 'Fatih', code: '0.1.1.1' },
+  { text: 'Ankara', code: '0.1.2' },
+  { text: 'Cankaya', code: '0.1.2.1' },
+  { text: 'Etimesgut', code: '0.1.2.1' },
+  { text: 'Elazig', code: '0.1.3' },
+  { text: 'Palu', code: '0.1.3.1' },
+  { text: 'Baskil', code: '0.1.3.2' },
+  { text: 'Sivrice', code: '0.1.3.3' }
 ];
 
 /**
@@ -47,7 +50,9 @@ const TREE_DATA = [
 export class ChecklistDatabase {
   dataChange = new BehaviorSubject<TreeItemNode[]>([]);
   treeData: any[];
-  get data(): TreeItemNode[] { return this.dataChange.value; }
+  get data(): TreeItemNode[] {
+    return this.dataChange.value;
+  }
 
   constructor() {
     this.initialize();
@@ -68,15 +73,20 @@ export class ChecklistDatabase {
    */
 
   buildFileTree(obj: any[], level: string): TreeItemNode[] {
-    return obj.filter(o =>
-      (<string>o.code).startsWith(level + '.')
-      && (o.code.match(/\./g) || []).length === (level.match(/\./g) || []).length + 1
-    )
+    return obj
+      .filter(
+        o =>
+          (<string>o.code).startsWith(level + '.') &&
+          (o.code.match(/\./g) || []).length ===
+            (level.match(/\./g) || []).length + 1
+      )
       .map(o => {
         const node = new TreeItemNode();
         node.item = o.text;
         node.code = o.code;
-        const children = obj.filter(so => (<string>so.code).startsWith(level + '.'));
+        const children = obj.filter(so =>
+          (<string>so.code).startsWith(level + '.')
+        );
         if (children && children.length > 0) {
           node.children = this.buildFileTree(children, o.code);
         }
@@ -88,9 +98,13 @@ export class ChecklistDatabase {
     let filteredTreeData;
     if (filterText) {
       console.log(this.treeData);
-      filteredTreeData = this.treeData.filter(d => d.text.toLocaleLowerCase().indexOf(filterText.toLocaleLowerCase()) > -1);
+      filteredTreeData = this.treeData.filter(
+        d =>
+          d.text.toLocaleLowerCase().indexOf(filterText.toLocaleLowerCase()) >
+          -1
+      );
       Object.assign([], filteredTreeData).forEach(ftd => {
-        let str = (<string>ftd.code);
+        let str = <string>ftd.code;
         while (str.lastIndexOf('.') > -1) {
           const index = str.lastIndexOf('.');
           str = str.substring(0, index);
@@ -120,9 +134,9 @@ export class ChecklistDatabase {
 @Component({
   selector: 'app-filter-tree',
   templateUrl: './filter-tree.component.html',
-  styleUrls: ['./filter-tree.component.css']
+  styleUrls: ['./filter-tree.component.css'],
+  providers: [ChecklistDatabase]
 })
-
 export class FilterTreeComponent {
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<TreeItemFlatNode, TreeItemNode>();
@@ -143,13 +157,25 @@ export class FilterTreeComponent {
   dataSource: MatTreeFlatDataSource<TreeItemNode, TreeItemFlatNode>;
 
   /** The selection for checklist */
-  checklistSelection = new SelectionModel<TreeItemFlatNode>(false /* multiple */);
+  checklistSelection = new SelectionModel<TreeItemFlatNode>(
+    false /* multiple */
+  );
 
   constructor(private database: ChecklistDatabase) {
-    this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
-      this.isExpandable, this.getChildren);
-    this.treeControl = new FlatTreeControl<TreeItemFlatNode>(this.getLevel, this.isExpandable);
-    this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+    this.treeFlattener = new MatTreeFlattener(
+      this.transformer,
+      this.getLevel,
+      this.isExpandable,
+      this.getChildren
+    );
+    this.treeControl = new FlatTreeControl<TreeItemFlatNode>(
+      this.getLevel,
+      this.isExpandable
+    );
+    this.dataSource = new MatTreeFlatDataSource(
+      this.treeControl,
+      this.treeFlattener
+    );
 
     database.dataChange.subscribe(data => {
       this.dataSource.data = data;
@@ -169,9 +195,10 @@ export class FilterTreeComponent {
    */
   transformer = (node: TreeItemNode, level: number) => {
     const existingNode = this.nestedNodeMap.get(node);
-    const flatNode = existingNode && existingNode.item === node.item
-      ? existingNode
-      : new TreeItemFlatNode();
+    const flatNode =
+      existingNode && existingNode.item === node.item
+        ? existingNode
+        : new TreeItemFlatNode();
     flatNode.item = node.item;
     flatNode.level = level;
     flatNode.code = node.code;
@@ -179,18 +206,22 @@ export class FilterTreeComponent {
     this.flatNodeMap.set(flatNode, node);
     this.nestedNodeMap.set(node, flatNode);
     return flatNode;
-  }
+  };
 
   /** Whether all the descendants of the node are selected */
   descendantsAllSelected(node: TreeItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
-    return descendants.every(child => this.checklistSelection.isSelected(child));
+    return descendants.every(child =>
+      this.checklistSelection.isSelected(child)
+    );
   }
 
   /** Whether part of the descendants are selected */
   descendantsPartiallySelected(node: TreeItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
-    const result = descendants.some(child => this.checklistSelection.isSelected(child));
+    const result = descendants.some(child =>
+      this.checklistSelection.isSelected(child)
+    );
     return result && !this.descendantsAllSelected(node);
   }
 
@@ -205,15 +236,13 @@ export class FilterTreeComponent {
 
   filterChanged(filterText: string) {
     this.database.filter(filterText);
-    if(filterText)
-    {
+    if (filterText) {
       this.treeControl.expandAll();
     } else {
       this.treeControl.collapseAll();
     }
   }
 }
-
 
 /**  Copyright 2018 Google Inc. All Rights Reserved.
     Use of this source code is governed by an MIT-style license that
