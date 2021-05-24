@@ -7,6 +7,7 @@ import {
 } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
 import { FILTER_TREE_DATA } from './filter-tree';
+import { FilterTreeItemFlatNode } from './filter-tree-item-flat-node';
 
 /**
  * Node for to-do item
@@ -18,12 +19,6 @@ export class FilterTreeItemNode {
 }
 
 /** Flat to-do item node with expandable and level information */
-export class FilterTreeItemFlatNode {
-  item: string;
-  level: number;
-  expandable: boolean;
-  code: string;
-}
 
 /**
  * The Json object for to-do list data.
