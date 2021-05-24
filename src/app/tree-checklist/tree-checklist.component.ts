@@ -160,4 +160,14 @@ ngOnInit(): void {
     return null;
   }
 
+
+  filterChanged(filterText: string) {
+    this._database.filter(filterText);
+    if (filterText) {
+      this.treeControl.expandAll();
+    } else {
+      this.treeControl.collapseAll();
+    }
+  }
+
 }
