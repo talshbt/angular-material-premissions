@@ -14,21 +14,21 @@ export class DynamicDatabase implements OnInit {
   //   ['Web Client', ['j', 'k', 'l']]
   // ]);
 
-  dataMap = new Map<string, { name: string; status: string }[]>([
+  dataMap = new Map<string, { name: string; status: string; isDuplicate }[]>([
     [
       'Tribe',
       [
-        { name: 'a', status: 'success' },
-        { name: 'b', status: 'success' },
-        { name: 'c', status: 'success' }
+        { name: 'a', status: 'success', isDuplicate: false },
+        { name: 'b', status: 'success', isDuplicate: false },
+        { name: 'c', status: 'success', isDuplicate: false }
       ]
     ],
     [
       'Mesila',
       [
-        { name: 'd', status: 'success' },
-        { name: 'e', status: 'success' },
-        { name: 'f', status: 'success' }
+        { name: 'd', status: 'success', isDuplicate: false },
+        { name: 'e', status: 'success', isDuplicate: false },
+        { name: 'f', status: 'success', isDuplicate: false }
       ]
     ]
   ]);
@@ -42,7 +42,7 @@ export class DynamicDatabase implements OnInit {
   initialData(permissionData): DynamicFlatNode[] {
     // console.log(this.dataMap);
     this.rootLevelNodes = permissionData;
-    this.findChild('a');
+    // this.findChild('a');
 
     this.rootLevelNodes.forEach(parent => {});
     return this.rootLevelNodes.map(name => new DynamicFlatNode(name, 0, true));
@@ -62,11 +62,14 @@ export class DynamicDatabase implements OnInit {
     return this.dataMap.has(node);
   }
 
-  findChild(name) {
+  findChild(node) {
     this.rootLevelNodes.forEach(parent => {
       const children = this.dataMap.get(parent);
       // console.log(children);
-      children.forEach(x => console.log(x.name == name));
+      children.forEach(x =>
+      node.isDuplicate = x.name == node.name
+       
+      );
 
       // this.children.forEach(parent => {
       // });
