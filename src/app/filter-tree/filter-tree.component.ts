@@ -6,6 +6,7 @@ import {
   MatTreeFlattener
 } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
+import { FILTER_TREE_DATA } from './filter-tree';
 
 /**
  * Node for to-do item
@@ -27,19 +28,6 @@ export class FilterTreeItemFlatNode {
 /**
  * The Json object for to-do list data.
  */
-const TREE_DATA = [
-  { text: 'Turkiye', code: '0.1' },
-  { text: 'İstanbul', code: '0.1.1' },
-  { text: 'Beykoz', code: '0.1.1.1' },
-  { text: 'Fatih', code: '0.1.1.1' },
-  { text: 'Ankara', code: '0.1.2' },
-  { text: 'Cankaya', code: '0.1.2.1' },
-  { text: 'Etimesgut', code: '0.1.2.1' },
-  { text: 'Elazig', code: '0.1.3' },
-  { text: 'Palu', code: '0.1.3.1' },
-  { text: 'Baskil', code: '0.1.3.2' },
-  { text: 'Sivrice', code: '0.1.3.3' }
-];
 
 /**
  * Checklist database, it can build a tree structured Json object.
@@ -59,10 +47,10 @@ export class ChecklistDatabase {
   }
 
   initialize() {
-    this.treeData = TREE_DATA;
+    this.treeData = FILTER_TREE_DATA;
     // Build the tree nodes from Json object. The result is a list of `TodoItemNode` with nested
     //     file node as children.
-    const data = this.buildFileTree(TREE_DATA, '0');
+    const data = this.buildFileTree(FILTER_TREE_DATA, '0');
     // Notify the change.
     this.dataChange.next(data);
   }
