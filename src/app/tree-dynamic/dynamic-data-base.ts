@@ -42,7 +42,7 @@ export class DynamicDatabase implements OnInit {
   initialData(permissionData): DynamicFlatNode[] {
     // console.log(this.dataMap);
     this.rootLevelNodes = permissionData;
-    // this.findChild('a');
+    this.findChild({ name: 'a', status: 'success', isDuplicate: false });
 
     this.rootLevelNodes.forEach(parent => {});
     return this.rootLevelNodes.map(name => new DynamicFlatNode(name, 0, true));
@@ -65,11 +65,8 @@ export class DynamicDatabase implements OnInit {
   findChild(node) {
     this.rootLevelNodes.forEach(parent => {
       const children = this.dataMap.get(parent);
-      // console.log(children);
-      children.forEach(x =>
-      node.isDuplicate = x.name == node.name
-       
-      );
+      children.forEach(x => (node.isDuplicate = x.name == node.name));
+      console.log(children);
 
       // this.children.forEach(parent => {
       // });
