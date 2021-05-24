@@ -22,6 +22,7 @@ export class TreeDynamicComponent implements OnInit {
       this.isExpandable
     );
     this.dataSource = new DynamicDataSource(this.treeControl, this.database);
+    this.dataSource.data = this.database.initialData(['Tribe', 'Mesila']);
 
     this.permissionService.getPermission().subscribe(permissionData => {
       this.dataSource.data = this.database.initialData(permissionData);
@@ -134,18 +135,16 @@ export class TreeDynamicComponent implements OnInit {
 
   yourArray = [1, 2, 9, 4, 9, 5, 1];
 
-  
-
-//  findDuplicate() {
+  //  findDuplicate() {
   //  let duplicates = [...this.checklistSelection.selected];
   //  this.checklistSelection.selected.forEach(node => {
-     // console.log(node.item);
-      // const i = duplicates.indexOf(node)
-      // duplicates = duplicates
-      //   .slice(0, i)
-      //   .concat(duplicates.slice(i + 1, duplicates.length))
+  // console.log(node.item);
+  // const i = duplicates.indexOf(node)
+  // duplicates = duplicates
+  //   .slice(0, i)
+  //   .concat(duplicates.slice(i + 1, duplicates.length))
   //  });
- // }
+  // }
 
   // console.log(duplicates) //[ 1, 5 ]
 }

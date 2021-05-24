@@ -4,11 +4,7 @@ import { DynamicFlatNode } from './dynamic-flat-node';
 
 @Injectable({ providedIn: 'root' })
 export class DynamicDatabase implements OnInit {
-  ngOnInit(): void {
-    // this.permissionService.getPermission().subscribe(permissionData => {
-    //   this.rootLevelNodes.push(permissionData);
-    // });
-  }
+  ngOnInit(): void {}
 
   constructor(private permissionService: PermissionService) {}
   // dataMap = new Map<string, string[]>([
@@ -40,9 +36,15 @@ export class DynamicDatabase implements OnInit {
   //rootLevelNodes: string[] = ['Tribe', 'Mesila', 'Rest'];
   rootLevelNodes: string[] = [];
 
+  // childArray = ['Tribe', 'Mesila'];
+
   /** Initial data from database */
   initialData(permissionData): DynamicFlatNode[] {
+    // console.log(this.dataMap);
     this.rootLevelNodes = permissionData;
+    this.findChild('a');
+
+    this.rootLevelNodes.forEach(parent => {});
     return this.rootLevelNodes.map(name => new DynamicFlatNode(name, 0, true));
   }
 
@@ -58,5 +60,16 @@ export class DynamicDatabase implements OnInit {
 
   isExpandable(node: string): boolean {
     return this.dataMap.has(node);
+  }
+
+  findChild(name) {
+    this.rootLevelNodes.forEach(parent => {
+      const children = this.dataMap.get(parent);
+      // console.log(children);
+      children.forEach(x => console.log(x.name == name));
+
+      // this.children.forEach(parent => {
+      // });
+    });
   }
 }
