@@ -17,7 +17,7 @@ export class FilterTreeItemNode {
 }
 
 /** Flat to-do item node with expandable and level information */
-export class TreeItemFlatNode {
+export class FilterTreeItemFlatNode {
   item: string;
   level: number;
   expandable: boolean;
@@ -139,25 +139,25 @@ export class ChecklistDatabase {
 })
 export class FilterTreeComponent {
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
-  flatNodeMap = new Map<TreeItemFlatNode, FilterTreeItemNode>();
+  flatNodeMap = new Map<FilterTreeItemFlatNode, FilterTreeItemNode>();
 
   /** Map from nested node to flattened node. This helps us to keep the same object for selection */
-  nestedNodeMap = new Map<FilterTreeItemNode, TreeItemFlatNode>();
+  nestedNodeMap = new Map<FilterTreeItemNode, FilterTreeItemFlatNode>();
 
   /** A selected parent node to be inserted */
-  selectedParent: TreeItemFlatNode | null = null;
+  selectedParent: FilterTreeItemFlatNode | null = null;
 
   /** The new item's name */
   newItemName = '';
 
-  treeControl: FlatTreeControl<TreeItemFlatNode>;
+  treeControl: FlatTreeControl<FilterTreeItemFlatNode>;
 
-  treeFlattener: MatTreeFlattener<FilterTreeItemNode, TreeItemFlatNode>;
+  treeFlattener: MatTreeFlattener<FilterTreeItemNode, FilterTreeItemFlatNode>;
 
-  dataSource: MatTreeFlatDataSource<FilterTreeItemNode, TreeItemFlatNode>;
+  dataSource: MatTreeFlatDataSource<FilterTreeItemNode, FilterTreeItemFlatNode>;
 
   /** The selection for checklist */
-  checklistSelection = new SelectionModel<TreeItemFlatNode>(
+  checklistSelection = new SelectionModel<FilterTreeItemFlatNode>(
     false /* multiple */
   );
 
@@ -168,7 +168,7 @@ export class FilterTreeComponent {
       this.isExpandable,
       this.getChildren
     );
-    this.treeControl = new FlatTreeControl<TreeItemFlatNode>(
+    this.treeControl = new FlatTreeControl<FilterTreeItemFlatNode>(
       this.getLevel,
       this.isExpandable
     );
@@ -182,13 +182,15 @@ export class FilterTreeComponent {
     });
   }
 
-  getLevel = (node: TreeItemFlatNode) => node.level;
+  getLevel = (node: FilterTreeItemFlatNode) => node.level;
 
-  isExpandable = (node: TreeItemFlatNode) => node.expandable;
+  isExpandable = (node: FilterTreeItemFlatNode) => node.expandable;
 
-  getChildren = (node: FilterTreeItemNode): FilterTreeItemNode[] => node.children;
+  getChildren = (node: FilterTreeItemNode): FilterTreeItemNode[] =>
+    node.children;
 
-  hasChild = (_: number, _nodeData: TreeItemFlatNode) => _nodeData.expandable;
+  hasChild = (_: number, _nodeData: FilterTreeItemFlatNode) =>
+    _nodeData.expandable;
 
   /**
    * Transformer to convert nested node to flat node. Record the nodes in maps for later use.
@@ -198,7 +200,7 @@ export class FilterTreeComponent {
     const flatNode =
       existingNode && existingNode.item === node.item
         ? existingNode
-        : new TreeItemFlatNode();
+        : new FilterTreeItemFlatNode();
     flatNode.item = node.item;
     flatNode.level = level;
     flatNode.code = node.code;
@@ -209,7 +211,7 @@ export class FilterTreeComponent {
   };
 
   /** Whether all the descendants of the node are selected */
-  descendantsAllSelected(node: TreeItemFlatNode): boolean {
+  descendantsAllSelected(node: FilterTreeItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     return descendants.every(child =>
       this.checklistSelection.isSelected(child)
@@ -217,7 +219,7 @@ export class FilterTreeComponent {
   }
 
   /** Whether part of the descendants are selected */
-  descendantsPartiallySelected(node: TreeItemFlatNode): boolean {
+  descendantsPartiallySelected(node: FilterTreeItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     const result = descendants.some(child =>
       this.checklistSelection.isSelected(child)
@@ -226,7 +228,7 @@ export class FilterTreeComponent {
   }
 
   /** Toggle the to-do item selection. Select/deselect all the descendants node */
-  todoItemSelectionToggle(node: TreeItemFlatNode): void {
+  todoItemSelectionToggle(node: FilterTreeItemFlatNode): void {
     this.checklistSelection.toggle(node);
     const descendants = this.treeControl.getDescendants(node);
     this.checklistSelection.isSelected(node)
