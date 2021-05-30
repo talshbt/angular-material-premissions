@@ -27,7 +27,7 @@ export class DynamicDatabase implements OnInit {
       'Mesila',
       [
         { name: 'd', status: 'success', isDuplicate: false },
-        { name: 'e', status: 'success', isDuplicate: false },
+        { name: 'a', status: 'success', isDuplicate: false },
         { name: 'f', status: 'success', isDuplicate: false }
       ]
     ]
@@ -63,13 +63,18 @@ export class DynamicDatabase implements OnInit {
   }
 
   findChild(node) {
+    let childArr = [];
     this.rootLevelNodes.forEach(parent => {
-      const children = this.dataMap.get(parent);
-      children.forEach(x => (node.isDuplicate = x.name == node.name));
-      console.log(children);
-
-      // this.children.forEach(parent => {
-      // });
+      let currentChildren = this.dataMap.get(parent);
+      currentChildren.forEach(x => {
+        let ind = childArr.indexOf(x.name);
+        console.log(ind);
+        // (node.isDuplicate = x.name == node.name)
+        console.log(x);
+        childArr.push(x.name);
+      });
     });
+
+    console.log(childArr);
   }
 }
