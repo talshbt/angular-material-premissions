@@ -70,9 +70,9 @@ export class DynamicDatabase implements OnInit {
         let ind = childArr.indexOf(x.name);
         x.isDuplicate = ind !== -1;
 
-        console.log(ind);
+        // console.log(ind);
         // (node.isDuplicate = x.name == node.name)
-        console.log(x);
+        // console.log(x);
         childArr.push(x.name);
       });
     });
