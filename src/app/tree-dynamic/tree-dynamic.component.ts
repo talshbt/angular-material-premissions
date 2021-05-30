@@ -34,6 +34,7 @@ export class TreeDynamicComponent implements OnInit {
   checklistSelection = new SelectionModel<DynamicFlatNode>(true /* multiple */);
 
   todoLeafItemSelectionToggle(node: DynamicFlatNode): void {
+    console.log(node);
     this.checklistSelection.toggle(node);
     this.checkAllParentsSelection(node);
   }
@@ -57,9 +58,11 @@ export class TreeDynamicComponent implements OnInit {
 
   /** Check root node checked state and change it accordingly */
   checkRootNodeSelection(node: DynamicFlatNode): void {
-    //console.log(this.checklistSelection.selected);
+    // console.log(this.checklistSelection.selected);
 
     const nodeSelected = this.checklistSelection.isSelected(node);
+    console.log(nodeSelected);
+
     const descendants = this.treeControl.getDescendants(node);
     const descAllSelected =
       descendants.length > 0 &&
@@ -132,19 +135,4 @@ export class TreeDynamicComponent implements OnInit {
   onGetAll() {
     console.log(this.checklistSelection.selected);
   }
-
-  yourArray = [1, 2, 9, 4, 9, 5, 1];
-
-  //  findDuplicate() {
-  //  let duplicates = [...this.checklistSelection.selected];
-  //  this.checklistSelection.selected.forEach(node => {
-  // console.log(node.item);
-  // const i = duplicates.indexOf(node)
-  // duplicates = duplicates
-  //   .slice(0, i)
-  //   .concat(duplicates.slice(i + 1, duplicates.length))
-  //  });
-  // }
-
-  // console.log(duplicates) //[ 1, 5 ]
 }
