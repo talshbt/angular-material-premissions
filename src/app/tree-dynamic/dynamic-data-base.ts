@@ -68,6 +68,8 @@ export class DynamicDatabase implements OnInit {
       let currentChildren = this.dataMap.get(parent);
       currentChildren.forEach(x => {
         let ind = childArr.indexOf(x.name);
+        x.isDuplicate = ind!==-1;
+
         console.log(ind);
         // (node.isDuplicate = x.name == node.name)
         console.log(x);
