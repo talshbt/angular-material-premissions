@@ -34,7 +34,8 @@ export class TreeDynamicComponent implements OnInit {
   checklistSelection = new SelectionModel<DynamicFlatNode>(true /* multiple */);
 
   todoLeafItemSelectionToggle(node: DynamicFlatNode): void {
-    // console.log(node);
+    console.log(node);
+    console.log(this.checklistSelection.deselect());
     this.checklistSelection.toggle(node);
     this.checkAllParentsSelection(node);
   }
@@ -98,6 +99,7 @@ export class TreeDynamicComponent implements OnInit {
 
   descendantsAllSelected(node: DynamicFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
+
     const descAllSelected =
       descendants.length > 0 &&
       descendants.every(child => {
@@ -117,8 +119,17 @@ export class TreeDynamicComponent implements OnInit {
 
   todoItemSelectionToggle(node: DynamicFlatNode): void {
     this.checklistSelection.toggle(node);
+    console.log(node);
 
     const descendants = this.treeControl.getDescendants(node);
+    console.log(descendants);
+
+    this.getAllChild(this.treeControl.dataNodes);
+
+    // console.log(this.treeControl.dataNodes[0]);
+    // this.treeControl.dataNodes.forEach(parent => {
+    //   // console.log(parent);
+    // });
     this.checklistSelection.isSelected(node)
       ? this.checklistSelection.select(...descendants)
       : this.checklistSelection.deselect(...descendants);
@@ -126,6 +137,11 @@ export class TreeDynamicComponent implements OnInit {
     // Force update for the parent
     descendants.forEach(child => this.checklistSelection.isSelected(child));
     this.checkAllParentsSelection(node);
+  }
+
+  getAllChild(arr) {
+    let parentsKeys = ['Tribe', 'Mesila'];
+    console.log(arr);
   }
 
   logNode(node) {
