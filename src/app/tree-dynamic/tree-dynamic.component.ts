@@ -113,8 +113,8 @@ export class TreeDynamicComponent implements OnInit {
 
   todoItemSelectionToggle(node: DynamicFlatNode): void {
     this.checklistSelection.toggle(node);
-    console.log(node);
-
+    //console.log(node);
+    this.onGetAll(node);
     const descendants = this.treeControl.getDescendants(node);
 
     this.checklistSelection.isSelected(node)
@@ -127,7 +127,7 @@ export class TreeDynamicComponent implements OnInit {
   }
 
   onGetAll(selectedNode) {
-    console.log(this.getParentNode(selectedNode));
+    console.log("-------------" + this.getParentNode(selectedNode));
     this.dataSource.data.forEach(node => {
       const descendants = this.treeControl.getDescendants(node);
       if (descendants.length) {
