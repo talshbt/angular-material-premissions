@@ -32,7 +32,7 @@ export class TreeDynamicComponent implements OnInit {
   checklistSelection = new SelectionModel<DynamicFlatNode>(true /* multiple */);
 
   todoLeafItemSelectionToggle(node: DynamicFlatNode): void {
-    // console.log(node);
+    console.log(node);
     this.checklistSelection.toggle(node);
     this.checkAllParentsSelection(node);
   }
@@ -104,7 +104,6 @@ export class TreeDynamicComponent implements OnInit {
 
   descendantsPartiallySelected(node: DynamicFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
-    // console.log(descendants);
     const result = descendants.some(child =>
       this.checklistSelection.isSelected(child)
     );
@@ -114,7 +113,6 @@ export class TreeDynamicComponent implements OnInit {
 
   todoItemSelectionToggle(node: DynamicFlatNode): void {
     this.checklistSelection.toggle(node);
-    // console.log(node);
 
     const descendants = this.treeControl.getDescendants(node);
 
