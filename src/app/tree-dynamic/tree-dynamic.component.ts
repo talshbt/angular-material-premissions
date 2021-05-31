@@ -136,7 +136,7 @@ export class TreeDynamicComponent implements OnInit {
         // console.log(node.item);
         // console.log(parent.item);
         descendants.forEach(child => {
-          console.log(child.item);
+          console.log(child.item === selectedNode.item);
         });
       }
     });
