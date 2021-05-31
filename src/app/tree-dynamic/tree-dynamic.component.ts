@@ -126,13 +126,15 @@ export class TreeDynamicComponent implements OnInit {
     this.checkAllParentsSelection(node);
   }
 
-  onGetAll() {
+  onGetAll(selectedNode) {
     this.dataSource.data.forEach(node => {
       // console.log(node);
       // console.log(this.dataSource.data);
       const descendants = this.treeControl.getDescendants(node);
-      console.log(node);
-      console.log(descendants);
+      // console.log(node);
+      if (descendants.length) {
+        console.log(descendants);
+      }
       // console.log(this.treeControl.getChildren);
     });
   }
