@@ -127,17 +127,13 @@ export class TreeDynamicComponent implements OnInit {
   }
 
   onGetAll(selectedNode) {
-    console.log('kdfjkshdfkjhsdkjfhskdjfhkj');
     const parent = this.getParentNode(selectedNode);
     this.dataSource.data.forEach(node => {
       const descendants = this.treeControl.getDescendants(node);
-
       if (descendants.length && parent.item !== node.item) {
         descendants.forEach(child => {
           if (child.item === selectedNode.item) {
             this.checklistSelection.toggle(child);
-
-            console.log(child.item === selectedNode.item);
           }
         });
       }
