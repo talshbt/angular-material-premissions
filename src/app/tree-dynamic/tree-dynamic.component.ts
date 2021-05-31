@@ -126,13 +126,6 @@ export class TreeDynamicComponent implements OnInit {
     this.checkAllParentsSelection(node);
   }
 
-  getAllChild(arr) {
-    let parentsKeys = ['Tribe', 'Mesila'];
-    this.treeControl.dataNodes.forEach(parent => {
-      // console.log(parent);
-    });
-  }
-
   onGetAll() {
     this.dataSource.data.forEach(node => {
       // console.log(node);
