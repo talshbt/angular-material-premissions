@@ -26,16 +26,13 @@ export class TreeDynamicComponent implements OnInit {
 
     this.permissionService.getPermission().subscribe(permissionData => {
       this.dataSource.data = this.database.initialData(permissionData);
-
-      // findDuplicate()
     });
   }
 
   checklistSelection = new SelectionModel<DynamicFlatNode>(true /* multiple */);
 
   todoLeafItemSelectionToggle(node: DynamicFlatNode): void {
-    console.log(node);
-    console.log(this.checklistSelection.deselect());
+    // console.log(node);
     this.checklistSelection.toggle(node);
     this.checkAllParentsSelection(node);
   }
@@ -59,10 +56,7 @@ export class TreeDynamicComponent implements OnInit {
 
   /** Check root node checked state and change it accordingly */
   checkRootNodeSelection(node: DynamicFlatNode): void {
-    // console.log(this.checklistSelection.selected);
-
     const nodeSelected = this.checklistSelection.isSelected(node);
-    // console.log(nodeSelected);
 
     const descendants = this.treeControl.getDescendants(node);
     const descAllSelected =
@@ -110,6 +104,7 @@ export class TreeDynamicComponent implements OnInit {
 
   descendantsPartiallySelected(node: DynamicFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
+    // console.log(descendants);
     const result = descendants.some(child =>
       this.checklistSelection.isSelected(child)
     );
@@ -119,17 +114,10 @@ export class TreeDynamicComponent implements OnInit {
 
   todoItemSelectionToggle(node: DynamicFlatNode): void {
     this.checklistSelection.toggle(node);
-    console.log(node);
+    // console.log(node);
 
     const descendants = this.treeControl.getDescendants(node);
-    console.log(descendants);
 
-    this.getAllChild(this.treeControl.dataNodes);
-
-    // console.log(this.treeControl.dataNodes[0]);
-    // this.treeControl.dataNodes.forEach(parent => {
-    //   // console.log(parent);
-    // });
     this.checklistSelection.isSelected(node)
       ? this.checklistSelection.select(...descendants)
       : this.checklistSelection.deselect(...descendants);
@@ -141,14 +129,19 @@ export class TreeDynamicComponent implements OnInit {
 
   getAllChild(arr) {
     let parentsKeys = ['Tribe', 'Mesila'];
-    console.log(arr);
-  }
-
-  logNode(node) {
-    // console.log(node);
+    this.treeControl.dataNodes.forEach(parent => {
+      // console.log(parent);
+    });
   }
 
   onGetAll() {
-    //   console.log(this.checklistSelection.selected);
+    this.dataSource.data.forEach(node => {
+      // console.log(node);
+      // console.log(this.dataSource.data);
+      const descendants = this.treeControl.getDescendants(node);
+      console.log(node);
+      console.log(descendants);
+      // console.log(this.treeControl.getChildren);
+    });
   }
 }
